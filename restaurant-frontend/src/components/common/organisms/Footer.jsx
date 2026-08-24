@@ -10,9 +10,9 @@ export default function Footer() {
     <footer className="bg-gradient-to-b from-warm-900 via-warm-950 to-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16 py-14 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-16 py-14 md:py-16">
           {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1 text-center md:text-left">
+          <div className="sm:col-span-2 text-center md:text-left">
             <Link to="/" className="inline-flex items-center gap-2">
               <img
                 src={ASSETS.Logo}
@@ -127,10 +127,10 @@ export default function Footer() {
               Contact Us
             </h3>
 
-            <ul className="flex flex-col items-center md:items-start gap-3 text-sm text-warm-400">
+            <ul className="flex flex-col items-center md:items-start gap-3 text-[13px] text-warm-400">
               <li className="flex items-start gap-2">
                 <MapPin size={17} className="text-secondary shrink-0 mt-0.5" />
-                <span>123 El-Hagar St., Cairo, Egypt</span>
+                <span>El-Hagar St., Cairo, Egypt</span>
               </li>
 
               <li className="flex items-center gap-2">
@@ -140,7 +140,7 @@ export default function Footer() {
 
               <li className="flex items-start gap-2">
                 <Mail size={17} className="text-secondary shrink-0 mt-0.5" />
-                <span className="break-all">hello@SAVORA-restaurant.com</span>
+                <span className="break-all">hello@SAVORA.com</span>
               </li>
             </ul>
 
@@ -154,7 +154,7 @@ export default function Footer() {
                 </h4>
               </div>
 
-              <p className="text-sm text-warm-400 text-center md:text-left">
+              <p className="text-[13px] text-warm-400 text-center md:text-left">
                 Daily: 11:00 AM — 11:00 PM
               </p>
             </div>
