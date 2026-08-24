@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 const api = axios.create({
   baseURL:
     import.meta.env.VITE_API_URL ||
-    "https://savora-railway-production.up.railway.app/api",
+    "https://savorarestaurant-production.up.railway.app/api",
   headers: {
     "Content-Type": "application/json",
   },
