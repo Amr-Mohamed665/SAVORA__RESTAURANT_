@@ -1,8 +1,8 @@
 import { ShieldCheck, Eye, Lock, FileText } from "lucide-react";
 
-import LegalHeader from "../../components/common/organisms/Legal/LegalHeader";
-import LegalSection from "../../components/common/organisms/Legal/LegalSection";
-import LegalContact from "../../components/common/organisms/Legal/LegalContact";
+import LegalHeader from "../../components/features/customer/Legal/LegalHeader";
+import LegalSection from "../../components/features/customer/Legal/LegalSection";
+import LegalContact from "../../components/features/customer/Legal/LegalContact";
 
 const sections = [
   {
