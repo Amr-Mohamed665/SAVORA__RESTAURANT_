@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Leaf, ChefHat, Truck, Award } from "lucide-react";
 
 import { menuService } from "../../services/menuService";
-import { filterAvailableItems, applyMenuOrder } from "../../utils/menuStorage";
+import { filterAvailableItems, applyMenuOrder, isItemPopular } from "../../utils/menuStorage";
 
 import {
   HomeHero,
@@ -54,7 +54,7 @@ export default function HomePage() {
     select: (data) => applyMenuOrder(filterAvailableItems(data)),
   });
 
-  const popularDishes = dishes.slice(0, 4);
+  const popularDishes = dishes.filter((dish) => isItemPopular(dish.id));
 
   return (
     <div>

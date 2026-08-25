@@ -8,7 +8,7 @@ Call these endpoints from React using **Axios** — you never write backend code
 ## Base URL
 
 ```
-https://<your-provided-url>/api
+https://savorarestaurant-production.up.railway.app/api
 ```
 
 > Your instructor will give you the real base URL. Every endpoint below is
@@ -27,7 +27,7 @@ Password: Admin@12345
 
 - Put the base URL in a `.env` file in your React project:
   ```
-  VITE_API_URL=https://<your-provided-url>/api
+  VITE_API_URL=https://savorarestaurant-production.up.railway.app/api
   ```
 - All request and response bodies are **JSON**.
 - Every response follows the same shape:

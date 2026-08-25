@@ -42,12 +42,10 @@ export default function MenuPage() {
         params.category = activeCategory;
       }
 
-      const data = await menuService.getMenu(params);
-
-      const available = filterAvailableItems(data);
-
-      return applyMenuOrder(available);
+      return menuService.getMenu(params);
     },
+
+    select: (data) => applyMenuOrder(filterAvailableItems(data)),
 
     staleTime: 1000 * 60 * 5,
   });
