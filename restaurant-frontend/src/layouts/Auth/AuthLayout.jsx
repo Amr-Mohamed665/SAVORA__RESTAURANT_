@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { ASSETS } from "../../constants/assets";
 
 export default function AuthLayout() {
@@ -12,21 +12,23 @@ export default function AuthLayout() {
           <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-secondary/10 blur-3xl" />
           <div className="absolute bottom-10 right-10 w-52 h-52 rounded-full bg-primary/10 blur-3xl" />
           <div className="relative z-10 text-center">
-            <img
-              src={ASSETS.Logo}
-              alt="SAVORA"
-              className="w-36 xl:w-44 mx-auto mb-6 drop-shadow-2xl"
-            />
-            <h2 className="font-playfair text-4xl xl:text-5xl font-bold tracking-tight text-secondary">
-              SAVORA
-            </h2>
-            <div className="flex items-center justify-center gap-3 mt-3">
-              <span className="w-10 h-px bg-secondary/50" />
-              <span className="text-[11px] uppercase tracking-[0.3em] text-white/70">
-                Restaurant
-              </span>
-              <span className="w-10 h-px bg-secondary/50" />
-            </div>
+            <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
+              <img
+                src={ASSETS.Logo}
+                alt="SAVORA"
+                className="w-36 xl:w-44 mx-auto mb-6 drop-shadow-2xl"
+              />
+              <h2 className="font-playfair text-4xl xl:text-5xl font-bold tracking-tight text-secondary">
+                SAVORA
+              </h2>
+              <div className="flex items-center justify-center gap-3 mt-3">
+                <span className="w-10 h-px bg-secondary/50" />
+                <span className="text-[11px] uppercase tracking-[0.3em] text-white/70">
+                  Restaurant
+                </span>
+                <span className="w-10 h-px bg-secondary/50" />
+              </div>
+            </Link>
             <p className="mt-8 text-sm text-white/40 max-w-xs mx-auto leading-relaxed">
               Taste the moment. Experience flavors crafted with passion.
             </p>

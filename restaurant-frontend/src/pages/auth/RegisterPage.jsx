@@ -53,6 +53,19 @@ export default function RegisterPage() {
 
   return (
     <>
+      {/* Mobile Brand */}
+      <div className="lg:hidden text-center mb-8">
+        <Link to="/" className="inline-flex flex-col items-center">
+          <span className="font-playfair text-2xl font-bold text-secondary tracking-tight">
+            SAVORA
+          </span>
+
+          <span className="text-[9px] uppercase tracking-[0.28em] text-white/60 mt-1">
+            Restaurant
+          </span>
+        </Link>
+      </div>
+
       {/* Welcome */}
       <div className="mb-8 text-center">
         <p className="mb-2 font-playfair text-lg italic text-secondary">
