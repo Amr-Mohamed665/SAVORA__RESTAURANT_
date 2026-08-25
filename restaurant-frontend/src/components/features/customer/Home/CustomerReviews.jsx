@@ -111,7 +111,8 @@ export default function CustomerReviews() {
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={20}
-            slidesPerView={1.2}
+            slidesPerView={1}
+            centeredSlides={true}
             loop={true}
             autoplay={{
               delay: 3000,
@@ -132,9 +133,9 @@ export default function CustomerReviews() {
             }}
             grabCursor={true}
             breakpoints={{
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              1024: { slidesPerView: 3, spaceBetween: 24 },
-              1280: { slidesPerView: 4, spaceBetween: 28 },
+              640: { slidesPerView: 2, spaceBetween: 20, centeredSlides: false },
+              1024: { slidesPerView: 3, spaceBetween: 24, centeredSlides: false },
+              1280: { slidesPerView: 4, spaceBetween: 28, centeredSlides: false },
             }}
             className="!pb-14 testimonials-swiper"
           >
