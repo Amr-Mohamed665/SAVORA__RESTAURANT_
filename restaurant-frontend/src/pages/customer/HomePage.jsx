@@ -56,7 +56,7 @@ export default function HomePage() {
 
   let popularDishes = dishes.filter((dish) => isItemPopular(dish.id));
 
-  if (popularDishes.length === 0) {
+  if (popularDishes.length < 8) {
     popularDishes = dishes.slice(0, 8);
   }
 
