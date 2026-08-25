@@ -138,6 +138,7 @@ export function applyMenuOrder(items) {
  *   - Append new item IDs (not in saved order) to the end.
  *   - Prune IDs that no longer exist in the backend list.
  *   - Prune stale availability entries for deleted items.
+ *   - Prune stale popular IDs for deleted items.
  *
  * Call this every time you receive a fresh list from the API so the
  * two sources of truth stay consistent.
@@ -169,6 +170,15 @@ export function syncNewItems(items) {
     }
   }
   if (changed) saveAvailabilityMap(map);
+
+  // --- Popular IDs ---
+  // Remove IDs for items that no longer exist in the backend so they
+  // don't silently consume slots in the MAX_POPULAR cap.
+  const currentPopular = getPopularIds();
+  const prunedPopular = currentPopular.filter((id) => backendSet.has(id));
+  if (prunedPopular.length !== currentPopular.length) {
+    setPopularIds(prunedPopular);
+  }
 }
 
 /**

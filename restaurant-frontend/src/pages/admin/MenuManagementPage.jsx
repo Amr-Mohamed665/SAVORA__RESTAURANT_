@@ -42,7 +42,7 @@ export default function MenuManagementPage() {
   // Fetch Menu
 
   const {
-    data: menuData = [],
+    data: menuData,
     isLoading: menuLoading,
     isError,
     error,
@@ -105,6 +105,8 @@ export default function MenuManagementPage() {
       ),
     );
 
+    queryClient.invalidateQueries({ queryKey: ["menu"] });
+
     toast.success(
       `${item.name} is now ${newAvailable ? "available" : "unavailable"}`,
     );
@@ -127,6 +129,8 @@ export default function MenuManagementPage() {
 
     const isNowPopular = next.includes(String(item.id));
 
+    queryClient.invalidateQueries({ queryKey: ["menu"] });
+
     toast.success(
       isNowPopular
         ? `"${item.name}" added to Popular Dishes ⭐`
@@ -142,6 +146,8 @@ export default function MenuManagementPage() {
     const ids = reordered.map((item) => item.id);
 
     setMenuOrder(ids);
+
+    queryClient.invalidateQueries({ queryKey: ["menu"] });
 
     try {
       await menuService.reorderMenu(ids);
