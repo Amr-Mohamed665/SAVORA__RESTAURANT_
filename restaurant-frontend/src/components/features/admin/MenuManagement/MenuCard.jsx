@@ -6,6 +6,7 @@ import {
   ToggleRight,
   ChevronUp,
   ChevronDown,
+  Star,
 } from "lucide-react";
 
 import { formatPrice } from "../../../../utils/formatters";
@@ -15,6 +16,8 @@ export default function MenuCard({
   index,
   isLast,
   isSearching,
+  isPopular,
+  onTogglePopular,
   handleToggleAvailability,
   setDeleteModal,
   handleMoveUp,
@@ -29,8 +32,24 @@ export default function MenuCard({
         isDragged ? "border-primary bg-primary/5" : ""
       } ${!item.available ? "opacity-65" : ""}`}
     >
+      {/* Popular */}
+      <button
+        type="button"
+        onClick={() => onTogglePopular(item)}
+        title={
+          isPopular ? "Remove from Popular Dishes" : "Add to Popular Dishes"
+        }
+        className={`absolute top-3 left-3 z-10 p-2 rounded-full border transition-all cursor-pointer shadow-md ${
+          isPopular
+            ? "bg-amber-500 border-amber-400 text-white"
+            : "bg-gray-950/85 border-gray-800 text-gray-400 hover:text-white"
+        }`}
+      >
+        <Star size={18} fill={isPopular ? "currentColor" : "none"} />
+      </button>
+
       {/* Main Content */}
-      <div className="flex-1 p-4 flex flex-col gap-3 min-w-0">
+      <div className="flex-1 p-4 pl-16 flex flex-col gap-3 min-w-0">
         {/* Header */}
         <div className="flex items-center gap-3 min-w-0">
           <img

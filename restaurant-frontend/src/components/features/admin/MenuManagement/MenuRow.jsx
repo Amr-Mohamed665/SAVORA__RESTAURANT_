@@ -5,6 +5,7 @@ import {
   ToggleLeft,
   ToggleRight,
   GripVertical,
+  Star,
 } from "lucide-react";
 
 import { formatPrice } from "../../../../utils/formatters";
@@ -13,6 +14,8 @@ export default function MenuRow({
   item,
   index,
   isSearching,
+  isPopular,
+  onTogglePopular,
   handleToggleAvailability,
   setDeleteModal,
   handleDragStart,
@@ -31,8 +34,25 @@ export default function MenuRow({
         isDragged ? "bg-primary/5 border-primary/30" : ""
       } ${!item.available ? "opacity-60" : ""}`}
     >
+      {/* Popular */}
+      <td className="px-6 py-4">
+        <button
+          type="button"
+          onClick={() => onTogglePopular(item)}
+          title={
+            isPopular ? "Remove from Popular Dishes" : "Add to Popular Dishes"
+          }
+          className={`inline-flex items-center justify-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full transition-colors cursor-pointer w-24 ${
+            isPopular
+              ? "bg-amber-500/15 text-amber-400 hover:bg-amber-500/25"
+              : "bg-gray-800/60 text-gray-500 hover:bg-gray-700/60 hover:text-gray-300"
+          }`}
+        >
+          <Star size={12} fill={isPopular ? "currentColor" : "none"} />
 
-
+          {isPopular ? "Popular" : "Add"}
+        </button>
+      </td>
       {/* Drag Handle */}
       <td className="px-6 py-4">
         <div className="flex items-center text-gray-500">

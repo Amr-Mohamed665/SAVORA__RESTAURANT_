@@ -14,6 +14,9 @@ import {
   setMenuOrder,
   syncNewItems,
   removeItemFromStorage,
+  getPopularIds,
+  toggleItemPopular,
+  MAX_POPULAR,
 } from "../../utils/menuStorage";
 
 import SearchBar from "../../components/common/molecules/SearchBar";
@@ -34,6 +37,7 @@ export default function MenuManagementPage() {
   const [deleteModal, setDeleteModal] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [popularIds, setPopularIdsState] = useState(() => getPopularIds());
 
   // Fetch Menu
 
@@ -109,6 +113,32 @@ export default function MenuManagementPage() {
   };
 
 
+
+  // Toggle Popular
+
+  const handleTogglePopular = (item) => {
+    const result = toggleItemPopular(item.id);
+
+    if (!result.ok && result.limitReached) {
+      toast.error(`You can only feature up to ${MAX_POPULAR} popular dishes.`);
+
+      return;
+    }
+
+    const next = getPopularIds();
+
+    setPopularIdsState(next);
+
+    const isNowPopular = next.includes(String(item.id));
+
+    queryClient.invalidateQueries({ queryKey: ["menu"] });
+
+    toast.success(
+      isNowPopular
+        ? `"${item.name}" added to Popular Dishes ⭐`
+        : `"${item.name}" removed from Popular Dishes`,
+    );
+  };
 
   // Reorder
 
@@ -304,6 +334,12 @@ export default function MenuManagementPage() {
 
 
           <li>
+            <span className="text-gray-300 font-medium">Popular Star ⭐:</span>{" "}
+            Feature dishes on the customer home page. Active items will
+            automatically sync to popular dishes (max {MAX_POPULAR}).
+          </li>
+
+          <li>
             <span className="text-gray-300 font-medium">
               Availability Status:
             </span>{" "}
@@ -365,6 +401,10 @@ export default function MenuManagementPage() {
                   <table className="w-full">
                     <thead>
                       <tr className="text-xs text-gray-400 uppercase tracking-wider border-b border-gray-800/30">
+                        <th className="text-left px-6 py-3 font-medium w-32">
+                          Popular
+                        </th>
+
                         <th className="text-left px-6 py-3 font-medium w-20">
                           Order
                         </th>
@@ -398,6 +438,8 @@ export default function MenuManagementPage() {
                           item={item}
                           index={index}
                           isLast={index === filteredItems.length - 1}
+                          isPopular={popularIds.includes(String(item.id))}
+                          onTogglePopular={handleTogglePopular}
                           handleToggleAvailability={handleToggleAvailability}
                           setDeleteModal={setDeleteModal}
                           {...reorderProps}
@@ -419,6 +461,8 @@ export default function MenuManagementPage() {
                     item={item}
                     index={index}
                     isLast={index === filteredItems.length - 1}
+                    isPopular={popularIds.includes(String(item.id))}
+                    onTogglePopular={handleTogglePopular}
                     handleToggleAvailability={handleToggleAvailability}
                     setDeleteModal={setDeleteModal}
                     {...reorderProps}
