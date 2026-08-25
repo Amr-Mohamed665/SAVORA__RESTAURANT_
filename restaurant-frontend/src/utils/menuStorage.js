@@ -171,14 +171,6 @@ export function syncNewItems(items) {
   }
   if (changed) saveAvailabilityMap(map);
 
-  // --- Popular IDs ---
-  // Remove IDs for items that no longer exist in the backend so they
-  // don't silently consume slots in the MAX_POPULAR cap.
-  const currentPopular = getPopularIds();
-  const prunedPopular = currentPopular.filter((id) => backendSet.has(id));
-  if (prunedPopular.length !== currentPopular.length) {
-    setPopularIds(prunedPopular);
-  }
 }
 
 /**
@@ -202,66 +194,6 @@ export function removeItemFromStorage(id) {
     saveAvailabilityMap(map);
   }
 
-  // Remove from popular set
-  const popular = getPopularIds();
-  if (popular.includes(key)) {
-    setPopularIds(popular.filter((i) => i !== key));
-  }
 }
 
-// ---------------------------------------------------------------------------
-// Popular-dish helpers  (key: savora_popular_ids)
-// ---------------------------------------------------------------------------
 
-const POPULAR_KEY = 'savora_popular_ids';
-export const MAX_POPULAR = 8;
-
-/**
- * Read the array of popular item IDs from localStorage.
- * @returns {string[]}
- */
-export function getPopularIds() {
-  try {
-    const raw = localStorage.getItem(POPULAR_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-/**
- * Persist the popular IDs array (at most MAX_POPULAR entries).
- * @param {string[]} ids
- */
-export function setPopularIds(ids) {
-  localStorage.setItem(POPULAR_KEY, JSON.stringify(ids.slice(0, MAX_POPULAR).map(String)));
-}
-
-/**
- * Check whether a single item is marked as popular.
- * @param {string|number} id
- * @returns {boolean}
- */
-export function isItemPopular(id) {
-  return getPopularIds().includes(String(id));
-}
-
-/**
- * Toggle an item's popular status.
- * Adding is blocked when MAX_POPULAR items are already selected.
- * @param {string|number} id
- * @returns {{ ok: boolean, limitReached: boolean }}
- */
-export function toggleItemPopular(id) {
-  const key = String(id);
-  const current = getPopularIds();
-  if (current.includes(key)) {
-    setPopularIds(current.filter((i) => i !== key));
-    return { ok: true, limitReached: false };
-  }
-  if (current.length >= MAX_POPULAR) {
-    return { ok: false, limitReached: true };
-  }
-  setPopularIds([...current, key]);
-  return { ok: true, limitReached: false };
-}

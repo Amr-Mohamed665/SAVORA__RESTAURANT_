@@ -12,7 +12,7 @@ export default function PopularDishes({ dishes, loading }) {
         </span>
 
         <h2 className="font-playfair text-3xl md:text-4xl font-bold text-warm-900 mt-2">
-          Popular Dishes
+          Featured Dishes
         </h2>
 
         <p className="text-warm-500 mt-3 max-w-xl mx-auto text-sm md:text-base">
