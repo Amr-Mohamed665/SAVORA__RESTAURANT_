@@ -54,7 +54,11 @@ export default function HomePage() {
     select: (data) => applyMenuOrder(filterAvailableItems(data)),
   });
 
-  const popularDishes = dishes.filter((dish) => isItemPopular(dish.id));
+  let popularDishes = dishes.filter((dish) => isItemPopular(dish.id));
+
+  if (popularDishes.length === 0) {
+    popularDishes = dishes.slice(0, 8);
+  }
 
   return (
     <div>
