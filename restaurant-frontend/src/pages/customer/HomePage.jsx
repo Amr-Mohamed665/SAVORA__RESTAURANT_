@@ -8,6 +8,7 @@ import {
   HomeHero,
   PopularDishes,
   WhyChooseSavora,
+  CustomerReviews,
 } from "../../components/features/customer/Home";
 
 const features = [
@@ -74,6 +75,8 @@ export default function HomePage() {
         features={features}
         happyCustomerAvatars={happyCustomerAvatars}
       />
+
+      <CustomerReviews />
     </div>
   );
 }
